@@ -17,6 +17,7 @@ font-size:10px;
         {% if session["user"] is defined %}
         Welcome, {{ session["user"]["first_name"] }}.
         <a href='/orderhistory'>View Order History</a> |
+        <a href='/change_page'>Change Password</a> |
         <a href='/cart'>View Cart</a> |
         <a href='/logout'>Logout</a>
         {% else %}

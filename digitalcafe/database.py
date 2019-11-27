@@ -23,7 +23,6 @@ def create_order(order):
     orders_coll = order_management_db['orders']
     orders_coll.insert(order)
 
-
 def get_product(code):
     products_coll = products_db["products"]
 
@@ -69,3 +68,20 @@ def get_user(username):
     customers_coll = order_management_db['customers']
     user=customers_coll.find_one({"username":username})
     return user
+
+
+def change_pw(username, user_pw):
+    pw_coll = order_management_db['customers']
+    customer = {"username":user_user}
+    change = {"$set": {"password":new1}}
+
+    pw_coll.find_one_and_update(customer,change)
+
+    return
+
+def password(username):
+    pw_coll = order_management_db['customers']
+    user =pw_coll.find_one({"username":username})
+    password = user["password"]
+
+    return password

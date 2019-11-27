@@ -14,8 +14,6 @@ app = Flask(__name__)
 # Keep this really secret!
 app.secret_key = b's@g@d@c0ff33!'
 
-
-
 logging.basicConfig(level=logging.DEBUG)
 app.logger.setLevel(logging.INFO)
 
@@ -69,7 +67,7 @@ def addtocart():
     return redirect('/cart')
 
 
-@app.route('/updatecart', methods = ['POST', ])
+@app.route('/updatecart', methods = ['POST'])
 def updatecart():
 
     request_type = request.form.get('submit')
@@ -157,3 +155,28 @@ def branchdetails():
 @app.route('/aboutus')
 def aboutus():
     return render_template('aboutus.html', page="About Us")
+
+@app.route('/change_page')
+def change_page():
+    return render_template('change_password.html')
+
+@app.route('/change_password', methods =['GET','POST'])
+def change_password():
+    pw = request.form.get("old")
+    new1 = request.form.get("new1")
+    new2 = request.form.get("new2")
+    user = session["user"]
+    username = user["username"]
+    user_pass = db.password(username)
+
+    if pw == user_pass:
+        if new1 == new2:
+            db.change_pw(username, user_pw)
+            error = "Password Change Successs"
+            return render_template('/change_password.html', error=error)
+        else:
+            error = "Passwords do not match"
+            return render_template('/change_password.html', error=error)
+    else:
+        error = "Invalid Password"
+        return render_template('/change_password.html', error=error, pw=pw)

@@ -9,6 +9,7 @@ def login(username, password):
             is_valid_login=True
             user={"username":username,
                   "first_name":temp_user["first_name"],
-                  "last_name":temp_user["last_name"]}
+                  "last_name":temp_user["last_name"],
+                  "password":temp_user["password"]}
 
     return is_valid_login, user
